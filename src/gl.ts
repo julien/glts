@@ -1,12 +1,11 @@
-
 interface AttribInfo {
-  info: WebGLActiveInfo | null;
-  location: GLint | null;
+    info: WebGLActiveInfo | null;
+    location: GLint | null;
 }
 
 interface UniformInfo {
-  info: WebGLActiveInfo | null;
-  location: WebGLUniformLocation | null;
+    info: WebGLActiveInfo | null;
+    location: WebGLUniformLocation | null;
 }
 
 interface ProgramInfo {
@@ -51,8 +50,8 @@ export function createProgram(gl: WebGLRenderingContext, vert: string, frag: str
 
 export function getProgramData(gl: WebGLRenderingContext, program: WebGLProgram):
 [
-  Record<string, AttribInfo>,
-  Record<string, UniformInfo>
+    Record<string, AttribInfo>,
+    Record<string, UniformInfo>
 ] {
     const attribs: Record<string, AttribInfo> = {};
     const uniforms: Record<string, UniformInfo> = {};
