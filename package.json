@@ -1,22 +1,18 @@
 {
   "name": "glts",
   "version": "1.0.0",
-  "description": "glts ----",
-  "main": "gl.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc",
+    "lint": "tslint --project ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/julien/glts.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/julien/glts/issues"
   },
-  "homepage": "https://github.com/julien/glts#readme",
   "devDependencies": {
     "tslint": "^5.12.1",
     "typescript": "^3.3.1"
