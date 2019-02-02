@@ -1,14 +1,14 @@
-interface AttribInfo {
+export interface AttribInfo {
     info: WebGLActiveInfo | null;
     location: GLint | null;
 }
 
-interface UniformInfo {
+export interface UniformInfo {
     info: WebGLActiveInfo | null;
     location: WebGLUniformLocation | null;
 }
 
-interface ProgramInfo {
+export interface ProgramInfo {
     attribs: Record<string, AttribInfo>;
     program: WebGLProgram;
     uniforms: Record<string, UniformInfo>;
