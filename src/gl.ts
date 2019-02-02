@@ -57,7 +57,9 @@ export function getProgramData(gl: WebGLRenderingContext, program: WebGLProgram)
     active = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
     for (i = 0; i < active; i++) {
         const info: WebGLActiveInfo | null = gl.getActiveAttrib(program, i);
-        if (!info) continue;
+        if (!info) {
+            continue;
+        }
         const location: GLint | null = gl.getAttribLocation(program, info.name);
         attribs[info.name] = { info, location };
     }
@@ -65,7 +67,9 @@ export function getProgramData(gl: WebGLRenderingContext, program: WebGLProgram)
     active = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
     for (i = 0; i < active; i++) {
         const info: WebGLActiveInfo | null = gl.getActiveUniform(program, i);
-        if (!info) continue;
+        if (!info) {
+            continue;
+        }
         const location: WebGLUniformLocation | null  = gl.getUniformLocation(program, info.name);
         uniforms[info.name] = { info, location };
     }
