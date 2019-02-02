@@ -6,7 +6,6 @@ interface ProgramInfo {
 }
 
 export function createProgram(gl: WebGLRenderingContext, vert: string, frag: string): ProgramInfo {
-
     const vs: WebGLShader = gl.createShader(gl.VERTEX_SHADER);
     gl.shaderSource(vs, vert);
     gl.compileShader(vs);
@@ -68,5 +67,4 @@ export function getProgramData(gl: WebGLRenderingContext, program: WebGLProgram)
 
     return [attribs, uniforms];
 }
-
 
