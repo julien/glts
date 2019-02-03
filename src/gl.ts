@@ -1,11 +1,15 @@
+type GLintOrNull = GLint | null;
+type WebGLActiveInfoOrNull = WebGLActiveInfo | null;
+type WebGLUniformLocationOrNull = WebGLUniformLocation | null;
+
 export interface AttribInfo {
-    info: WebGLActiveInfo | null;
-    location: GLint | null;
+    info: WebGLActiveInfoOrNull;
+    location: GLintOrNull;
 }
 
 export interface UniformInfo {
-    info: WebGLActiveInfo | null;
-    location: WebGLUniformLocation | null;
+    info: WebGLActiveInfoOrNull;
+    location: WebGLUniformLocationOrNull;
 }
 
 export interface ProgramInfo {
@@ -56,21 +60,21 @@ export function getProgramData(gl: WebGLRenderingContext, program: WebGLProgram)
 
     active = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
     for (i = 0; i < active; i++) {
-        const info: WebGLActiveInfo | null = gl.getActiveAttrib(program, i);
+        const info: WebGLActiveInfoOrNull = gl.getActiveAttrib(program, i);
         if (!info) {
             continue;
         }
-        const location: GLint | null = gl.getAttribLocation(program, info.name);
+        const location: GLintOrNull = gl.getAttribLocation(program, info.name);
         attribs[info.name] = { info, location };
     }
 
     active = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
     for (i = 0; i < active; i++) {
-        const info: WebGLActiveInfo | null = gl.getActiveUniform(program, i);
+        const info: WebGLActiveInfoOrNull | null = gl.getActiveUniform(program, i);
         if (!info) {
             continue;
         }
-        const location: WebGLUniformLocation | null  = gl.getUniformLocation(program, info.name);
+        const location: WebGLUniformLocationOrNull = gl.getUniformLocation(program, info.name);
         uniforms[info.name] = { info, location };
     }
 
