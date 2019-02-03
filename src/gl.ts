@@ -81,3 +81,19 @@ export function getProgramData(gl: WebGLRenderingContext, program: WebGLProgram)
     return [attribs, uniforms];
 }
 
+export function createTexture(gl: WebGLRenderingContext,
+    wrap: GLint = WebGLRenderingContext.CLAMP_TO_EDGE,
+    filter: GLint = WebGLRenderingContext.LINEAR): WebGLTexture {
+    const tex: WebGLTexture | null = gl.createTexture();
+    if (!tex) {
+        throw new Error("Could not create texture");
+    }
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrap);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, wrap);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
+
+    return tex;
+}
