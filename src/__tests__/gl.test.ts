@@ -1,42 +1,42 @@
 const createContext = require("gl");
 
 import {
-    ProgramInfo,
-    createProgram
+  createProgram,
 } from "../gl";
 
 const gl: WebGLRenderingContext = createContext(200, 200);
 
 describe("glts tests", () => {
 
-    test("createProgram with 1 active attrib", () => {
-        const vert: string = `
+  test("createProgram with 1 active attrib", () => {
+    const vert: string = `
         precision mediump float;
         attribute vec2 a_position;
         void main() {
             gl_Position = vec4(a_position, 0.0, 1.0);
         }
         `;
-        const frag: string = `
+    const frag: string = `
         precision mediump float;
         void main() {
             gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
         }
         `;
 
-        const info: ProgramInfo = createProgram(gl, vert, frag);
+    const program: WebGLProgram = createProgram(gl, vert, frag);
 
-        expect(info).toBeDefined();
+    expect(program).toBeDefined();
 
-        expect(info.program).toBeDefined();
-        expect(info.attribs.a_position).toBeDefined();
+    const locPosition: GLint | null = gl.getAttribLocation(program, "a_position");
 
-        const uniforms: number = Object.keys(info.uniforms).length;
-        expect(uniforms).toBe(0);
-    });
+    expect(locPosition).toBeDefined();
 
-    test("createProgram with 1 active uniform", () => {
-        const vert: string = `
+    const locNonExisting: WebGLUniformLocation | null = gl.getUniformLocation(program, "non_existing");
+    expect(locNonExisting).toBeNull();
+  });
+
+  test("createProgram with 1 active uniform", () => {
+    const vert: string = `
         precision mediump float;
         uniform vec2 u_color;
         varying vec2 v_color;
@@ -45,7 +45,7 @@ describe("glts tests", () => {
             v_color = u_color;
         }
         `;
-        const frag: string = `
+    const frag: string = `
         precision mediump float;
         varying vec2 v_color;
         void main() {
@@ -53,54 +53,53 @@ describe("glts tests", () => {
         }
         `;
 
-        const info: ProgramInfo = createProgram(gl, vert, frag);
+    const program: WebGLProgram = createProgram(gl, vert, frag);
 
-        expect(info).toBeDefined();
+    expect(program).toBeDefined();
 
-        expect(info.program).toBeDefined();
-        expect(info.uniforms.u_color).toBeDefined();
+    const locNonExisting: GLint | null = gl.getAttribLocation(program, "a_non_exisiting");
+    expect(locNonExisting).toEqual(-1);
 
-        const attribs: number = Object.keys(info.attribs).length;
-        expect(attribs).toBe(0);
-    });
+    const locColor: WebGLUniformLocation | null = gl.getUniformLocation(program, "u_color");
+    expect(locColor).toBeDefined();
+  });
 
-    test("createProgram with vertex shader error", () => {
-        const vert: string = `
+  test("createProgram with vertex shader error", () => {
+    const vert: string = `
         precision mediump float;
         attribute vec1 a_position;
         void main() {
             gl_Position = vec4(a_position, 0.0, 1.0);
         }
         `;
-        const frag: string = "";
+    const frag: string = "";
 
-        function tryToCreateProgram() {
-            return createProgram(gl, vert, frag);
-        }
+    function tryToCreateProgram() {
+      return createProgram(gl, vert, frag);
+    }
 
-        expect(tryToCreateProgram).toThrow();
-    });
+    expect(tryToCreateProgram).toThrow();
+  });
 
-    test("createProgram with fragment shader error", () => {
-        const vert: string = `
+  test("createProgram with fragment shader error", () => {
+    const vert: string = `
         precision mediump float;
         attribute vec2 a_position;
         void main() {
             gl_Position = vec4(a_position, 0.0, 1.0);
         }
         `;
-        const frag: string = `
+    const frag: string = `
         precision mediump float;
         void main() {
             gl_FragColor = vec4(1.0, );
         }
         `;
 
-        function tryToCreateProgram() {
-            return createProgram(gl, vert, frag);
-        }
+    function tryToCreateProgram() {
+      return createProgram(gl, vert, frag);
+    }
 
-        expect(tryToCreateProgram).toThrow();
-    });
-
+    expect(tryToCreateProgram).toThrow();
+  });
 });
