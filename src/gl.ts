@@ -2,43 +2,46 @@ type GLintOrNull = GLint | null;
 type WebGLActiveInfoOrNull = WebGLActiveInfo | null;
 type WebGLUniformLocationOrNull = WebGLUniformLocation | null;
 
-export interface AttribInfo {
+export interface IAttribInfo {
     info: WebGLActiveInfoOrNull;
     location: GLintOrNull;
 }
 
-export interface UniformInfo {
+export interface IUniformInfo {
     info: WebGLActiveInfoOrNull;
     location: WebGLUniformLocationOrNull;
 }
 
-export interface ProgramInfo {
-    attribs: Record<string, AttribInfo>;
+export interface IProgramInfo {
+    attribs: Record<string, IAttribInfo>;
     program: WebGLProgram;
-    uniforms: Record<string, UniformInfo>;
+    uniforms: Record<string, IUniformInfo>;
 }
 
-export function createProgram(gl: WebGLRenderingContext, vert: string, frag: string): ProgramInfo {
-    const vs: WebGLShader  = <WebGLShader>gl.createShader(gl.VERTEX_SHADER);
+export function createProgram(
+    gl: WebGLRenderingContext,
+    vert: string,
+    frag: string): IProgramInfo {
+    const vs: WebGLShader  = gl.createShader(gl.VERTEX_SHADER) as WebGLShader;
     gl.shaderSource(vs, vert);
     gl.compileShader(vs);
     if (!gl.getShaderParameter(vs, gl.COMPILE_STATUS)) {
-        throw new Error(<string>gl.getShaderInfoLog(vs));
+        throw new Error(gl.getShaderInfoLog(vs) as string);
     }
 
-    const fs: WebGLShader = <WebGLShader>gl.createShader(gl.FRAGMENT_SHADER);
+    const fs: WebGLShader = gl.createShader(gl.FRAGMENT_SHADER) as WebGLShader;
     gl.shaderSource(fs, frag);
     gl.compileShader(fs);
     if (!gl.getShaderParameter(fs, gl.COMPILE_STATUS)) {
-        throw new Error(<string>gl.getShaderInfoLog(fs));
+        throw new Error(gl.getShaderInfoLog(fs) as string);
     }
 
-    const program: WebGLProgram = <WebGLProgram>gl.createProgram();
+    const program: WebGLProgram = gl.createProgram() as WebGLProgram;
     gl.attachShader(program, vs);
     gl.attachShader(program, fs);
     gl.linkProgram(program);
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        throw new Error(<string>gl.getProgramInfoLog(program));
+        throw new Error(gl.getProgramInfoLog(program) as string);
     }
     gl.deleteShader(vs);
     gl.deleteShader(fs);
@@ -48,13 +51,12 @@ export function createProgram(gl: WebGLRenderingContext, vert: string, frag: str
     return  { attribs, program, uniforms };
 }
 
-export function getProgramData(gl: WebGLRenderingContext, program: WebGLProgram):
-[
-    Record<string, AttribInfo>,
-    Record<string, UniformInfo>
-] {
-    const attribs: Record<string, AttribInfo> = {};
-    const uniforms: Record<string, UniformInfo> = {};
+export function getProgramData(
+    gl: WebGLRenderingContext,
+    program: WebGLProgram): [
+        Record<string, IAttribInfo>, Record<string, IUniformInfo>] {
+    const attribs: Record<string, IAttribInfo> = {};
+    const uniforms: Record<string, IUniformInfo> = {};
     let i: number;
     let active: GLint;
 
@@ -81,7 +83,8 @@ export function getProgramData(gl: WebGLRenderingContext, program: WebGLProgram)
     return [attribs, uniforms];
 }
 
-export function createTexture(gl: WebGLRenderingContext,
+export function createTexture(
+    gl: WebGLRenderingContext,
     wrap: GLint = WebGLRenderingContext.CLAMP_TO_EDGE,
     filter: GLint = WebGLRenderingContext.LINEAR): WebGLTexture {
     const tex: WebGLTexture | null = gl.createTexture();
@@ -96,4 +99,19 @@ export function createTexture(gl: WebGLRenderingContext,
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
 
     return tex;
+}
+
+export function createBuffer(
+    gl: WebGLRenderingContext,
+    target: GLenum,
+    size: GLsizeiptr,
+    usage: GLenum): WebGLBuffer {
+
+    const buf: WebGLBuffer | null = gl.createBuffer();
+    if (!buf) {
+        throw new Error("Could not create buffer");
+    }
+    gl.bindBuffer(target, buf);
+    gl.bufferData(target, size, usage);
+    return buf;
 }
