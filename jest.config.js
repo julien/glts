@@ -1,18 +1,19 @@
-'use strict'
+"use strict";
+
 module.exports = {
-  "roots": [
+  roots: [
     "<rootDir>/src"
   ],
-  "transform": {
+  transform: {
     "^.+\\.tsx?$": "ts-jest"
   },
-  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-  "moduleFileExtensions": [
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  moduleFileExtensions: [
     "ts",
     "tsx",
     "js",
     "jsx",
     "json",
     "node"
-  ]
+  ],
 };
