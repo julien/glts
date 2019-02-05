@@ -73,11 +73,11 @@ varying vec4 h;
 uniform mat4 i;
 
 void main() {
-  float q = cos(a);
-  float w = sin(a);
-  gl_Position = i * vec4(((vec2(d.x * q - d.y * w, d.x * w + d.y * q) * c) + b), 1.0, 1.0);
-  g = e;
-  h = f;
+    float q = cos(a);
+    float w = sin(a);
+    gl_Position = i * vec4(((vec2(d.x * q - d.y * w, d.x * w + d.y * q) * c) + b), 1.0, 1.0);
+    g = e;
+    h = f;
 }
 `;
 
@@ -160,7 +160,7 @@ export function createRenderer(canvas: HTMLCanvasElement): IRenderer {
   gl.vertexAttribPointer(locUv, 2, gl.FLOAT, false, VERTEX_SIZE, 28);
 
   gl.enableVertexAttribArray(locColor);
-  gl.vertexAttribPointer(locColor, 4, gl.UNSIGNED_BYTE, false, VERTEX_SIZE, 36);
+  gl.vertexAttribPointer(locColor, 4, gl.UNSIGNED_BYTE, true, VERTEX_SIZE, 36);
 
   gl.uniformMatrix4fv(gl.getUniformLocation(prog, "i"), false,
     new Float32Array([
