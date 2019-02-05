@@ -1,5 +1,4 @@
 "use strict";
-var lib = require("./dist/gl");
 var canvas = document.getElementById("canvas");
 var renderer = lib.createRenderer(canvas);
 var gl = renderer.gl;
@@ -23,7 +22,8 @@ var frames = [
 var currentFrame = 0;
 var mouse = {x: 0, y: 0};
 
-function Sprite(x, y, texture, textureWidth, textureHeight, frameX, frameY, frameW, frameH) {
+function Sprite(x, y, texture, textureWidth, textureHeight,
+                frameX, frameY, frameW, frameH) {
   this.positionX = x;
   this.positionY = y;
   this.width = frameW;
@@ -42,7 +42,8 @@ function Sprite(x, y, texture, textureWidth, textureHeight, frameX, frameY, fram
 function create() {
   var frame = frames[currentFrame];
   for (var i = 0; i < startCount; i++) {
-    var s = new Sprite(mouse.x, mouse.y, texture, textureWidth, textureHeight, frame[0], frame[1], frame[2], frame[3]);
+    var s = new Sprite(mouse.x, mouse.y, texture,
+                       textureWidth, textureHeight, frame[0], frame[1], frame[2], frame[3]);
     s.speedX = Math.random() * 10;
     s.speedY = (Math.random() * 10) - 5;
     sprites[count++] = s;
@@ -57,7 +58,8 @@ function update() {
   if (add && count < 200000) {
     var frame = frames[currentFrame];
     for (var i = 0; i < amount; i++) {
-      var s = new Sprite(mouse.x, mouse.y, texture, textureWidth, textureHeight, frame[0], frame[1], frame[2], frame[3]);
+      var s = new Sprite(mouse.x, mouse.y, texture,
+                         textureWidth, textureHeight, frame[0], frame[1], frame[2], frame[3]);
       s.speedX = Math.random() * 10;
       s.speedY = (Math.random() * 10) - 5;
       s.rotation = (Math.random() - 0.5);
