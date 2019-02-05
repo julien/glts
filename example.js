@@ -1,5 +1,5 @@
 "use strict";
-var lib = require("./dist/sprite");
+var lib = require("./dist/gl");
 var canvas = document.getElementById("canvas");
 var renderer = lib.createRenderer(canvas);
 var gl = renderer.gl;
@@ -21,6 +21,7 @@ var frames = [
   [0, 96, 32, 32]
 ];
 var currentFrame = 0;
+var mouse = {x: 0, y: 0};
 
 function Sprite(x, y, texture, textureWidth, textureHeight, frameX, frameY, frameW, frameH) {
   this.positionX = x;
@@ -41,7 +42,7 @@ function Sprite(x, y, texture, textureWidth, textureHeight, frameX, frameY, fram
 function create() {
   var frame = frames[currentFrame];
   for (var i = 0; i < startCount; i++) {
-    var s = new Sprite(0, 0, texture, textureWidth, textureHeight, frame[0], frame[1], frame[2], frame[3]);
+    var s = new Sprite(mouse.x, mouse.y, texture, textureWidth, textureHeight, frame[0], frame[1], frame[2], frame[3]);
     s.speedX = Math.random() * 10;
     s.speedY = (Math.random() * 10) - 5;
     sprites[count++] = s;
@@ -56,7 +57,7 @@ function update() {
   if (add && count < 200000) {
     var frame = frames[currentFrame];
     for (var i = 0; i < amount; i++) {
-      var s = new Sprite(0, 0, texture, textureWidth, textureHeight, frame[0], frame[1], frame[2], frame[3]);
+      var s = new Sprite(mouse.x, mouse.y, texture, textureWidth, textureHeight, frame[0], frame[1], frame[2], frame[3]);
       s.speedX = Math.random() * 10;
       s.speedY = (Math.random() * 10) - 5;
       s.rotation = (Math.random() - 0.5);
@@ -80,9 +81,9 @@ function update() {
       s.positionX = minX;
     }
 
-    if (s.positionX > maxY) {
-      s.speedX *= -0.85;
-      s.positionX = maxY;
+    if (s.positionY > maxY) {
+      s.speedY *= -0.85;
+      s.positionY = maxY;
 
       s.spin = (Math.random() * 0.5) * 0.2;
 
@@ -91,7 +92,7 @@ function update() {
       }
 
     } else if (s.positionY < minY) {
-      s.speedX = 0;
+      s.speedY = 0;
       s.positionY = minY;
     }
   }
@@ -130,9 +131,16 @@ function loop() {
   draw();
 }
 
-function mouseDown() {
+function mouseDown(e) {
+  mouse.x = e.x - canvas.offsetLeft;
+  mouse.y = e.y - canvas.offsetTop;
   add = true;
   currentFrame = (currentFrame + 1) % frames.length;
+}
+
+function mouseMove(e) {
+  mouse.x = e.x - canvas.offsetLeft;
+  mouse.y = e.y - canvas.offsetTop;
 }
 
 function mouseUp() {
@@ -143,6 +151,8 @@ canvas.addEventListener("mousedown", mouseDown, false);
 canvas.addEventListener("touchstart", mouseDown, false);
 canvas.addEventListener("mouseup", mouseUp, false);
 canvas.addEventListener("touchend", mouseUp, false);
+canvas.addEventListener("mousemove", mouseMove, false);
+canvas.addEventListener("touchmove", mouseMove, false);
 
 var texture;
 var textureWidth;
