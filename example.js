@@ -8,9 +8,9 @@ var minX = 0;
 var maxY = canvas.height;
 var minY = 0;
 var add = false;
-var startCount = 2;
+var startCount = 3;
 var count = 0;
-var amount = 100;
+var amount = 10;
 var sprites = [];
 var counter = document.getElementById("counter");
 var frames = [
@@ -48,7 +48,7 @@ function create() {
     s.speedY = (Math.random() * 10) - 5;
     sprites[count++] = s;
   }
-  counter.innerHTML = count + " sprites";
+  counter.innerHTML = `${count} SPRITES`;
 
   renderer.bkg(0.227, 0.227, 0.227);
   loop();
@@ -56,6 +56,9 @@ function create() {
 
 function update() {
   if (add && count < 200000) {
+
+    currentFrame = (currentFrame + 1) % frames.length;
+
     var frame = frames[currentFrame];
     for (var i = 0; i < amount; i++) {
       var s = new Sprite(mouse.x, mouse.y, texture,
@@ -65,7 +68,7 @@ function update() {
       s.rotation = (Math.random() - 0.5);
       sprites[count++] = s;
     }
-    counter.innerHTML = count + " sprites";
+    counter.innerHTML = `${count} SPRITES`;
   }
 
   for (var i = 0; i < count; i++) {
@@ -137,7 +140,6 @@ function mouseDown(e) {
   mouse.x = e.x - canvas.offsetLeft;
   mouse.y = e.y - canvas.offsetTop;
   add = true;
-  currentFrame = (currentFrame + 1) % frames.length;
 }
 
 function mouseMove(e) {
