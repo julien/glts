@@ -5,7 +5,7 @@
     "start": "npm run bundle",
     "test": "jest",
     "bundle": "npm run compile && rollup dist/gl.js --file dist/gl.es5.js --format iife --name \"lib\"",
-    "compile": "tsc",
+    "compile": "tsc -d",
     "lint": "tslint --project ."
   },
   "repository": {
