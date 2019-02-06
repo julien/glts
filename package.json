@@ -2,7 +2,7 @@
   "name": "glts",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife --name \"lib\"",
+    "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife",
     "test": "jest",
     "lint": "tslint --project ."
   },
