@@ -2,8 +2,8 @@
   "compilerOptions": {
     "module": "es2015",
     "target": "es5",
-    "noImplicitAny": true,
-    "strictNullChecks": true,
+    "removeComments": true,
+    "strict": true,
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
@@ -18,6 +18,6 @@
     "*/__tests__/"
   ],
   "include": [
-    "src/gl.ts"
+    "src/example.ts"
   ]
 }

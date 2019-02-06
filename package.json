@@ -2,10 +2,8 @@
   "name": "glts",
   "version": "1.0.0",
   "scripts": {
-    "start": "npm run bundle",
+    "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife --name \"lib\"",
     "test": "jest",
-    "bundle": "npm run compile && rollup dist/gl.js --file dist/gl.es5.js --format iife --name \"lib\"",
-    "compile": "tsc -d",
     "lint": "tslint --project ."
   },
   "repository": {
