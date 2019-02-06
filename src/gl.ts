@@ -1,8 +1,5 @@
 export function createBuffer(gl: WebGLRenderingContext, target: GLenum, size: GLsizeiptr, usage: GLenum): WebGLBuffer {
-  const buf: WebGLBuffer | null = gl.createBuffer();
-  if (!buf) {
-    throw new Error("Could not create buffer");
-  }
+  const buf: WebGLBuffer = gl.createBuffer() as WebGLBuffer;
   gl.bindBuffer(target, buf);
   gl.bufferData(target, size, usage);
   return buf;
@@ -37,11 +34,8 @@ export function createProgram(gl: WebGLRenderingContext, vert: string, frag: str
 }
 
 export function createTexture(gl: WebGLRenderingContext, image: HTMLImageElement,
-                              width: number, height: number): WebGLTexture {
-  const tex: WebGLTexture | null = gl.createTexture();
-  if (!tex) {
-    throw new Error("Could not create texture");
-  }
+                       width: number, height: number): WebGLTexture {
+  const tex: WebGLTexture = gl.createTexture() as WebGLTexture;
   gl.bindTexture(gl.TEXTURE_2D, tex);
 
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -103,14 +97,14 @@ class Renderer {
   public VBO: WebGLBuffer;
   public col: number = 0xFFFFFFFF;
   public count: number;
-  public currentTexture: WebGLTexture;
+  public currentTexture!: WebGLTexture;
 
   constructor(canvas: HTMLCanvasElement) {
-
     const gl: WebGLRenderingContext | null = canvas.getContext("webgl");
     if (!gl) {
       throw new Error("Couldn't initialize WebGL context");
     }
+
     this.gl = gl;
 
     const width: number = canvas.width;
@@ -285,6 +279,3 @@ class Renderer {
   }
 }
 
-export function createRenderer(canvas: HTMLCanvasElement): Renderer {
-  return new Renderer(canvas);
-}
