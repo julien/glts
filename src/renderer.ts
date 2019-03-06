@@ -1,4 +1,8 @@
-import {createBuffer, createProgram, createTexture} from "./gl";
+import {
+  createBuffer,
+  createProgram,
+  createTexture,
+} from "./gl";
 
 // float + (vec2 * 4) + (char * 4)
 const VERTEX_SIZE: number = 4 + ((4 * 2) * 4) + 4;
