@@ -1,8 +1,8 @@
 import {createTexture} from "./gl";
-import {createRenderer, Renderer} from "./renderer";
+import {Renderer} from "./renderer";
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
-const renderer: Renderer = createRenderer(canvas);
+const renderer: Renderer = new Renderer(canvas);
 const gl: WebGLRenderingContext = renderer.gl;
 const gravity: number = 0.85;
 const maxX: number = canvas.width;
