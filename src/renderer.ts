@@ -235,6 +235,3 @@ export class Renderer {
   }
 }
 
-export function createRenderer(canvas: HTMLCanvasElement): Renderer {
-  return new Renderer(canvas);
-}
