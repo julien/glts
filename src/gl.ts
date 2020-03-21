@@ -45,8 +45,6 @@ export function createProgram(
 export function createTexture(
   gl: WebGLRenderingContext,
   image: HTMLImageElement,
-  width: number,
-  height: number,
 ): WebGLTexture {
   const tex: WebGLTexture = gl.createTexture() as WebGLTexture;
   gl.bindTexture(gl.TEXTURE_2D, tex);

@@ -1,7 +1,6 @@
 import {
   createBuffer,
   createProgram,
-  createTexture,
 } from "./gl";
 
 // float + (vec2 * 4) + (char * 4)
