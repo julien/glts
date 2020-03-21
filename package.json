@@ -2,8 +2,7 @@
   "name": "glts",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife",
-    "lint": "tslint --project ."
+    "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife"
   },
   "repository": {
     "type": "git",
@@ -15,7 +14,6 @@
   },
   "devDependencies": {
     "rollup": "1.1.2",
-    "tslint": "^5.12.1",
     "typescript": "^3.3.1"
   }
 }
