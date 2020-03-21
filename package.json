@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife",
+    "format": "prettier --write src/*.ts *.js *.json",
     "lint": "eslint src/*.ts"
   },
   "repository": {
@@ -17,6 +18,7 @@
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "eslint": "^6.8.0",
+    "prettier": "^1.19.1",
     "rollup": "1.1.2",
     "typescript": "^3.3.1"
   }
