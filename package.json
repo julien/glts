@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife",
-    "test": "jest",
     "lint": "tslint --project ."
   },
   "repository": {
@@ -15,12 +14,7 @@
     "url": "https://github.com/julien/glts/issues"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.13",
-    "@types/node": "^10.12.21",
-    "jest": "^24.0.0",
-    "jest-gl": "^0.1.4",
     "rollup": "1.1.2",
-    "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "typescript": "^3.3.1"
   }
