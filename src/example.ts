@@ -220,7 +220,7 @@ canvas.addEventListener("mousemove", mouseMove, false);
 canvas.addEventListener("touchmove", mouseMove, false);
 
 img.onload = (): void => {
-	texture = createTexture(gl, img, img.width, img.height);
+	texture = createTexture(gl, img);
 	textureWidth = img.width;
 	textureHeight = img.height;
 	create();
