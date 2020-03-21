@@ -2,7 +2,8 @@
   "name": "glts",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife"
+    "start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife",
+    "lint": "eslint src/*.ts"
   },
   "repository": {
     "type": "git",
@@ -13,6 +14,9 @@
     "url": "https://github.com/julien/glts/issues"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "eslint": "^6.8.0",
     "rollup": "1.1.2",
     "typescript": "^3.3.1"
   }
