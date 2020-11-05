@@ -19,7 +19,7 @@ const frames: number[][] = [
 	[0, 0, 32, 32],
 	[0, 32, 32, 32],
 	[0, 64, 32, 32],
-	[0, 96, 32, 32]
+	[0, 96, 32, 32],
 ];
 
 interface IVec2 {
@@ -29,7 +29,7 @@ interface IVec2 {
 
 const mouse: IVec2 = {
 	x: 0,
-	y: 0
+	y: 0,
 };
 
 const img: HTMLImageElement = new Image();
