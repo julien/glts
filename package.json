@@ -4,7 +4,7 @@
 	"scripts": {
 		"start": "tsc && rollup dist/example.js --file dist/bundle.js --format iife",
 		"format": "npx prettier --write src/*.ts *.js *.json",
-		"lint": "eslint src/*.ts"
+		"lint": "npx eslint src/*.ts"
 	},
 	"repository": {
 		"type": "git",
